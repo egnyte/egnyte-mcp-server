@@ -91,15 +91,6 @@ uv run server.py --python 3.11
 This will start the MCP server locally and make the tools available to MCP-compliant clients.
 
 
-## Installing MCP Server
-
-```
-cd egnyte-mcp-server
-curl -LsSf https://astral.sh/uv/install.sh | sh # Install uv
-uv pip install egnyte
-uv run server.py --python 3.11
-```
-
 # ⚡ Setting up MCP Clients
 
 This is a sample MCP (Model Context Protocol) client that connects to a locally running MCP server using `fastmcp`.  
