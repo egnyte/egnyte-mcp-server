@@ -2,7 +2,7 @@
 
 An **MCP (Model Context Protocol)** server that connects to your Egnyte domain and exposes document search and retrieval functionality for use in **AI agents** like Cursor, Claude, or OpenAI.
 
-This server uses **Egnyte’s public APIs and Python SDK** to support secure, real-time access to your Egnyte content—enabling smart AI-driven workflows while respecting existing permissions.
+This server uses **Egnyte’s public APIs and Python SDK** to support secure, real-time access to your Egnyte content, enabling smart AI-driven workflows while respecting existing permissions.
 
 ---
 
