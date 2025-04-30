@@ -157,6 +157,46 @@ It uses **Python Stdio Transport** to communicate with the server and call speci
 ![Cursor MCP Run](images/cursor_mcp_run.png)
 
 ---
+###  Claude Desktop Setup
+
+To connect Egnyte’s MCP server to Claude Desktop:
+
+1. Launch Claude Desktop and open MCP tool configuration
+2. Go to Settings → MCP Tools → Add New Server
+3. Add the following configuration:
+
+```json
+{
+  "mcpServers": {
+    "egnyte": {
+      "command": "python3",
+      "args": ["server.py"],
+      "cwd": "/Users/yourname/path/to/mcp/server",
+      "env": {
+        "DOMAIN": "your-egnyte-domain.egnyte.com",
+        "ACCESS_TOKEN": "your-access-token"
+      }
+    }
+  }
+}
+```
+✅ Replace ` /Users/yourname/path/to/mcp/server ` with your actual directory path.
+
+4. Save and Start - Claude should detect the server, list search_for_document_by_name under “Available MCP tools,” and be able to call it with filenames.
+
+---
+## 🖼️ Example Screenshots
+
+### Claude MCP Server Configuration
+
+![Claude MCP Config](images/claude_mcp_config.png)
+
+### Cursor MCP Query in Action
+
+![Claude MCP Run](images/claude_mcp_run.png)
+
+
+
 
 ## 📈 Roadmap
 
