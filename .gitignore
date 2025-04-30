@@ -1,0 +1,14 @@
+*.pyc
+*.swp
+.key.json
+.pytest_cache
+__pycache__
+venv/
+.venv/
+None
+video_store
+.idea
+compare_*.csv
+cachedir/
+sample_*.pdf
+.env
