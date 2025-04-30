@@ -39,8 +39,8 @@ The **Egnyte MCP Server** allows agents to:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/egnyte/mcp-server-egnyte.git
-cd mcp/server/
+git clone https://github.com/egnyte/egnyte-mcp-server.git
+cd egnyte-mcp-server
 ```
 
 ### 2. Install `uv` (Python environment & dependency manager)
