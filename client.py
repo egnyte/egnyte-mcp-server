@@ -5,7 +5,7 @@ import asyncio
 server_script = "server.py" # Assumes this file exists and runs mcp.run()
 
 transport = PythonStdioTransport(
-    script_path="mcp/server/server.py"   
+    script_path=server_script
 )
 
 client = Client(transport)
