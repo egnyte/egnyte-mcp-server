@@ -94,7 +94,7 @@ This will start the MCP server locally and make the tools available to MCP-compl
 ## Installing MCP Server
 
 ```
-cd mcp/server/
+cd egnyte-mcp-server
 curl -LsSf https://astral.sh/uv/install.sh | sh # Install uv
 uv pip install egnyte
 uv run server.py --python 3.11
@@ -141,7 +141,7 @@ It uses **Python Stdio Transport** to communicate with the server and call speci
       "command": "uv",
       "args": [
         "--directory",
-        "/path/to/mcp/server",
+        "/path/to/egnyte-mcp-server",
         "run",
         "server.py"
       ]
@@ -149,7 +149,7 @@ It uses **Python Stdio Transport** to communicate with the server and call speci
   }
 }
 ```
-✅ Replace `/path/to/mcp/server` with your actual directory path.
+✅ Replace `/path/to/egnyte-mcp-server` with your actual directory path.
 
 4. Save and enable the server in the MCP settings.
 
