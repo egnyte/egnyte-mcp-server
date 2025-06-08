@@ -186,5 +186,8 @@ def register_links(mcp: FastMCP, client: EgnyteClient):
             - This operation is permanent and cannot be undone
             - Any users with the link will no longer be able to access the resource through this link
         """
-        result = client.links.delete(link_id)
+        result = client.links.get(link_id)
+        if result.check:
+            result = result.delete()
+
         return result
