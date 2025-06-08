@@ -2,7 +2,7 @@
 *.swp
 .key.json
 .pytest_cache
-__pycache__
+*__pycache__
 venv/
 .venv/
 None
@@ -12,3 +12,5 @@ compare_*.csv
 cachedir/
 sample_*.pdf
 .env
+uv.lock
+*egg-info/
