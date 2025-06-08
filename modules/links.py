@@ -125,3 +125,66 @@ def register_links(mcp: FastMCP, client: EgnyteClient):
             count=count,
         )
         return links
+
+    @mcp.tool()
+    async def get_link_by_id(link_id: str) -> dict:
+        """Retrieves detailed information about a specific link in the Egnyte domain.
+
+        This function implements the Egnyte Links API to fetch comprehensive details about a single link
+        using its unique identifier. The response includes all metadata and configuration settings
+        associated with the link.
+
+        Args:
+            link_id (str): The unique identifier of the link to retrieve. This is the ID portion of the link URL
+                          (e.g., for URL 'https://domain.egnyte.com/dl/abc123', the link_id would be 'abc123')
+
+        Returns:
+            dict: A dictionary containing detailed information about the link, including:
+                - path: The absolute path of the target resource (file or folder)
+                - type: The type of link (file/folder)
+                - accessibility: Who can access the link (anyone/password/domain/recipients)
+                - protection: Link protection level (PREVIEW or NONE)
+                - recipients: List of recipient email addresses
+                - notify: Whether creator is notified on access
+                - url: The full URL of the link
+                - id: The unique identifier of the link
+                - link_to_current: Whether link points to current version
+                - creation_date: When the link was created
+                - created_by: Username of the creator
+                - resource_id: ID of the associated resource
+                - expiry_clicks: Remaining clicks before expiration (if applicable)
+                - expiry_date: Expiration date (if applicable)
+                - last_accessed: Last access timestamp (if accessed)
+
+        Note:
+            - The link must exist and the user must have permission to view it
+            - If the link has been deleted or expired, this will return an error
+            - Non-admin users can only view links they created
+        """
+        link = client.links.get(link_id)
+        return link
+
+    @mcp.tool()
+    async def delete_link_by_id(link_id: str) -> dict:
+        """Deletes a specific link from the Egnyte domain.
+
+        This function implements the Egnyte Links API to permanently delete a link using its unique identifier.
+        Once deleted, the link cannot be recovered and any existing access to the link will be revoked.
+
+        Args:
+            link_id (str): The unique identifier of the link to delete. This is the ID portion of the link URL
+                          (e.g., for URL 'https://domain.egnyte.com/dl/abc123', the link_id would be 'abc123')
+
+        Returns:
+            dict: A dictionary containing the result of the deletion operation, typically including:
+                - success: Boolean indicating if the deletion was successful
+                - message: Description of the operation result
+
+        Note:
+            - The link must exist and the user must have permission to delete it
+            - Non-admin users can only delete links they created
+            - This operation is permanent and cannot be undone
+            - Any users with the link will no longer be able to access the resource through this link
+        """
+        result = client.links.delete(link_id)
+        return result
