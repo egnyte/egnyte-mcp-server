@@ -18,7 +18,7 @@ def register_links(mcp: FastMCP, client: EgnyteClient):
         expiry_date: Optional[str],
         expiry_clicks: Optional[int],
         add_filename: Optional[bool],
-    ) -> str:
+    ) -> dict:
         """Creates a sharing link for a file or folder in Egnyte with configurable access and notification settings.
 
         This function implements the Egnyte Links API to create shareable links for files or folders.
@@ -40,15 +40,33 @@ def register_links(mcp: FastMCP, client: EgnyteClient):
             link_to_current (Optional[bool]): If True, link always points to current version of file (file links only)
             expiry_date (Optional[str]): Link expiration date in YYYY-MM-DD format
             expiry_clicks (Optional[int]): Number of clicks before link expires (1-10)
-            add_file_name (Optional[bool]): If True, appends filename to the link URL (file links only)
+            add_filename (Optional[bool]): If True, appends filename to the link URL (file links only)
 
         Returns:
-            str: The created sharing link URL
+            dict: A dictionary containing the created link information, including:
+                - id: The unique identifier of the created link
+                - url: The full URL of the created link
+                - recipients: List of email addresses to which the link was sent (if send_email was True)
+                - path: The absolute path of the target resource (file or folder)
+                - type: The type of link created (file/folder)
+                - accessibility: The access level set for the link (anyone/password/domain/recipients)
+                - notify: Whether creator will be notified on access
+                - link_to_current: Whether link points to current version (file links only)
+                - expiry_date: Expiration date if set (YYYY-MM-DD format)
+                - creation_date: When the link was created
+                - created_by: Username of the creator
+                - protection: Link protection level (PREVIEW or NONE)
+                - resource_id: ID of the associated resource
+                - expiry_clicks: Number of clicks before expiration (if set)
+                - last_accessed: Last access timestamp (if accessed)
+                - password: The password for accessing the link (only present when accessibility is "password")
 
         Note:
             - expiry_date and expiry_clicks are mutually exclusive
             - For password-protected links, a password will be auto-generated if not specified
             - The link will be created with domain-level default settings if useDefaultSettings is True
+            - If send_email is True, recipients must be provided
+            - The response includes all metadata and configuration settings of the created link
         """
         link = client.links.create(
             path,
