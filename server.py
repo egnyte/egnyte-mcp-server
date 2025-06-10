@@ -1,14 +1,16 @@
 from typing import Any
 import httpx
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 from requests.auth import HTTPBasicAuth
-from typing import List
+from typing import List, Optional
 from egnyte import configuration, client
+from modules import register_links
+
+
 # from import domain, access_token
 
 # Initialize FastMCP server
-mcp = FastMCP("Egnyte Document Store Retriever")
-
+mcp = FastMCP("Egnyte MCP Server")
 
 import os
 from dotenv import load_dotenv
@@ -17,14 +19,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Access the variables
-domain = os.getenv('DOMAIN')
-access_token = os.getenv('ACCESS_TOKEN')
+domain = os.getenv("DOMAIN")
+access_token = os.getenv("ACCESS_TOKEN")
 
 
-client = client.EgnyteClient({"domain": domain,
-    "access_token": access_token
-})
-
+client = client.EgnyteClient({"domain": domain, "access_token": access_token})
+register_links(mcp, client)
 
 
 @mcp.tool()
