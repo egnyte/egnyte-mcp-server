@@ -5,7 +5,7 @@ from requests.auth import HTTPBasicAuth
 from typing import List, Optional
 from egnyte import configuration, client
 from modules import register_links
-
+from modules.comments import register_comments
 
 # from import domain, access_token
 
@@ -25,6 +25,7 @@ access_token = os.getenv("ACCESS_TOKEN")
 
 client = client.EgnyteClient({"domain": domain, "access_token": access_token})
 register_links(mcp, client)
+register_comments(mcp, client)
 
 
 @mcp.tool()
